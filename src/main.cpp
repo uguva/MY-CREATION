@@ -8,13 +8,37 @@
 #include "module_manager.h"
 #include "ui_utils.h"
 
-using namespace std;
+#ifdef _WIN32
+    #define byte _windows_byte
+    #include <windows.h>
+    #undef byte
+#endif
+
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+using std::vector;
+using std::ifstream;
+using std::ofstream;
+using std::ios;
+using std::getline;
+using std::exception;
+using std::runtime_error;
+using std::streamsize;
+using std::numeric_limits;
 
 // Перечисления для навигации меню (enum class)
 enum class MenuOption { Exit = 0, RSA = 1, DiffieHellman = 2 };
 enum class SubMenuOption { Back = 0, Keygen = 1, Encrypt = 2, Decrypt = 3 };
 
 int main() {
+
+    #ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+    #endif
+
     if (!login()) {
         cout << "Ошибка доступа." << endl;
         return 1;
@@ -22,10 +46,9 @@ int main() {
 
     ModuleManager manager;
     try {
-        // Кроссплатформенная загрузка библиотек
         #ifdef _WIN32
-            manager.load_module("./plugins/rsa/rsa.dll");
-            manager.load_module("./plugins/DiffieHellman/dh.dll");
+            manager.load_module("./plugins/rsa/librsa.dll");
+            manager.load_module("./plugins/DiffieHellman/libdh.dll");
         #else
             manager.load_module("./plugins/rsa/librsa.so");
             manager.load_module("./plugins/DiffieHellman/libdh.so");

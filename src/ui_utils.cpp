@@ -5,7 +5,19 @@
 #include <limits>
 #include <stdexcept>
 
-using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+using std::vector;
+using std::ifstream;
+using std::ofstream;
+using std::ios;
+using std::getline;
+using std::exception;
+using std::runtime_error;
+using std::streamsize;
+using std::numeric_limits;
 
 void clear_input() {
     cin.clear();

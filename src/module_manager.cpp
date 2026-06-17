@@ -2,12 +2,17 @@
 #include <stdexcept>
 
 #ifdef _WIN32
+    #define byte _windows_byte 
     #include <windows.h>
+    #undef byte
 #else
     #include <dlfcn.h>
 #endif
 
-using namespace std;
+using std::string;
+using std::runtime_error;
+using std::to_string;
+using std::map;
 
 ModuleManager::~ModuleManager() {
     unload_all();
