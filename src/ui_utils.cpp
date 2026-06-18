@@ -239,7 +239,6 @@ void process_keygen(LoadedModule* mod) {
         if (status == CryptoStatus::Success) {
             cout << "\n>>> Ключи успешно сгенерированы!\n";
             
-            // ИСПРАВЛЕНО: Теперь текст меню выводится перед вызовом get_choice
             cout << "\nКак поступить со сгенерированными ключами?\n"
                  << "1. Вывести результаты в консоль\n"
                  << "2. Сохранить результаты в файл\n"
@@ -262,7 +261,7 @@ void process_keygen(LoadedModule* mod) {
                 cout << ">>> Ключ успешно сохранен в файл: " << path << endl;
             }
         } else if (status == CryptoStatus::InvalidParam) {
-            throw runtime_error("Неверные параметры модулей. Проверьте простоту чисел / формат.");
+            throw runtime_error("Неверные параметры. Проверьте простоту чисел / формат ввода чисел.");
         } else {
             throw runtime_error("Внутренняя ошибка генерации.");
         }
